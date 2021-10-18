@@ -28,19 +28,12 @@ let automaticUpgrades = {
     increase: 4,
     multiplier: 2
   },
-  schoolFish: {
-    name: '5 Fish',
-    count: 0,
-    price: 50,
-    increase: 20,
-    multiplier: 4
-  },
   mermaid: {
     name: 'Mermaid',
     count: 0,
-    price: 1000,
+    price: 100000,
     increase: 40,
-    multiplier: 15
+    multiplier: 10
   }
 }
 
@@ -117,18 +110,21 @@ function buyFish() {
   if (bubbles >= increaseofFish) {
 
     totalFish.count++
-    bubbles -= increaseofFish
+    let fishIncrease = totalFish.count * totalFish.price
+    bubbles -= fishIncrease
     increaseofFish = (increaseofFish * costMultiplier)
 
-    bubbleIncrease = increaseofFish + totalFish.multiplier
-    console.log('count', totalFish.count)
-    console.log('bubble increase', bubbleIncrease)
+    let bubblesIncrease = totalFish.count * totalFish.multiplier
+    // console.log('count', totalFish.count)
+    // console.log('bubble increase', bubbleIncrease)
 
     document.getElementById('totalFish').innerText = `Total Fish: ${totalFish.count}`
-    document.getElementById('buyFish').innerText = `Fish: ${increaseofFish} Bubbles`
-    collecting = 3
+    document.getElementById('buyFish').innerText = `Fish: ${increaseofFish} Bubbles (+${bubblesIncrease + 40} every 3 seconds)`
+    setInterval(drawAutos, 3000)
+
+    drawAutos()
     update()
-    console.log(bubbles)
+    update2()
   } else {
 
   }
@@ -145,30 +141,21 @@ function buyMermaid() {
     bubbles -= increaseofMermaid
     increaseofMermaid = (increaseofMermaid * costMultiplier)
 
+
     bubbleIncrease = increaseofMermaid + totalMermaid.multiplier
     console.log('count', totalMermaid.count)
     console.log('bubble increase', bubbleIncrease)
 
     document.getElementById('totalMermaid').innerText = `Total Mermaid: ${totalMermaid.count}`
-    document.getElementById('buyMermaid').innerText = `Mermaid: ${increaseofMermaid} Bubbles`
-    collecting = 3
-    update()
+    document.getElementById('buyMermaid').innerText = `Mermaid: ${increaseofMermaid} Bubbles (+${totalMermaid.increase} every 3 seconds)`
     console.log(bubbles)
+    setInterval(drawAutos, 3000)
+    update()
   } else {
 
   }
-  let interval = setInterval(3000)
-  collecting--
-  if (automaticUpgrades['Mermaid'].count > 0) {
-    if (collecting < 0) {
-      bubbles += automaticUpgrades['Mermaid'].increase
-    } else {
 
-    }
-  }
 }
-
-
 
 function draw() {
 
@@ -181,42 +168,14 @@ function draw() {
   // }
 }
 
-// function purchasedItem() {
-//   for (let key in clickUpgrades) {
-//     var upgradedTo = clickUpgrades[key]
-//   }
-//   let upgradedItem = upgradedTo[key]
-//   let increaseofItem = ((upgradedItem.count + 1) * upgradedItem.price)
-//   console.log('increase', increaseofItem)
-//   if (bubbles >= increaseofItem) {
-
-//     upgradedItem.count++
-//     bubbles -= increaseofItem
-//     increaseofItem = (increaseofItem * costMultiplier)
-
-//     bubbleIncrease = increaseofItem + upgradedItem.multiplier
-//     console.log('count', upgradedItem.count)
-//     console.log('bubble increase', bubbleIncrease)
-
-
-//     console.log(bubbles)
-//   } else {
-
-//   }
-//   updateDraw()
-// }
-
-
-// function buyItem() {
-//   let purchaseItem = 
-// }
-
 function drawAutos() {
-  for (increase in automaticUpgrades) {
-
-
+  for (let key in automaticUpgrades) {
+    let itemUpgraded = automaticUpgrades[key]
+    multiplierIncreased = itemUpgraded.multiplier * itemUpgraded.count * itemUpgraded.increase
+    // bubbleIncrease += multiplierIncreased
+    bubbleIncrease += itemUpgraded.increase
+    bubbles += itemUpgraded.increase
+    update()
   }
   console.log(bubbles)
 }
-
-setInterval(drawAutos, 3000)
