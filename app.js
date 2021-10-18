@@ -79,10 +79,11 @@ function buySmallBag() {
     document.getElementById('buySmallBags').innerText = `Small Bag: ${increaseofSmallBags} Bubbles (+${newIncreaseSmallBag + 2})`
     bubbleIncrease += newIncreaseSmallBag
     update()
+    update2()
   } else {
 
   }
-  update2()
+
 }
 
 function buyLargeBag() {
@@ -100,10 +101,11 @@ function buyLargeBag() {
     document.getElementById('buyLargeBags').innerText = `Large Bag: ${increaseofLargeBags} Bubbles (+${newIncreaseLargeBag + 3})`
     bubbleIncrease += newIncreaseLargeBag
     update()
+    update2()
   } else {
 
   }
-  update2()
+
 }
 
 
@@ -129,15 +131,6 @@ function buyFish() {
     console.log(bubbles)
   } else {
 
-  }
-  let interval = setInterval(3000)
-  collecting--
-  if (automaticUpgrades['fish'].count > 0) {
-    if (collecting < 0) {
-      bubbles += automaticUpgrades['fish'].increase
-    } else {
-
-    }
   }
 }
 
@@ -175,27 +168,7 @@ function buyMermaid() {
   }
 }
 
-// function collection() {
 
-// }
-// function collectingTimer() {
-//   collecting--
-//   if (automaticUpgrades['fish'].count > 0) {
-//     if (collecting < 0) {
-//       bubbles += automaticUpgrades['fish'].increase
-//     } else {
-
-//     }
-//   }
-//   collection()
-//   update()
-// }
-
-// function updateDraw() {
-//   document.getElementById('upgradedItem').innerText = `Total Small Bags: ${upgradedItem.count}`
-//   document.getElementById('buySmallBags').innerText = `Small Bag: ${increaseofItem} Bubbles`
-
-// }
 
 function draw() {
 
@@ -237,3 +210,13 @@ function draw() {
 // function buyItem() {
 //   let purchaseItem = 
 // }
+
+function drawAutos() {
+  for (increase in automaticUpgrades) {
+
+
+  }
+  console.log(bubbles)
+}
+
+setInterval(drawAutos, 3000)
